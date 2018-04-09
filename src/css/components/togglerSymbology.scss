@@ -1,0 +1,55 @@
+
+  .toggler {
+    width: 500px;
+    height: 200px;
+    display: flex;
+    z-index: 15;
+    position: absolute;
+    bottom: 1em;
+    margin-left: 1em;
+    flex-direction: column-reverse;
+  }
+  #buttonToggler {
+    padding: .5em 1em;
+    text-decoration: none;
+    position: absolute;
+    z-index: 15;
+    display: flex;
+  }
+
+  #buttonToggler2 {
+    padding: .5em 1em;
+    text-decoration: none;
+    position: absolute;
+    z-index: 15;
+    display: flex;
+    margin-left: 2em;
+  }
+
+  #buttonToggler3 {
+    padding: .5em 1em;
+    text-decoration: none;
+    position: absolute;
+    z-index: 15;
+    display: flex;
+    margin-left: 4em;
+  }
+
+  #effect {
+    /*position: relative;
+    width: 240px;
+    height: 170px;
+    padding: 0.4em;
+    bottom: 3em;
+    */
+    position: relative;
+    width: 270px;
+    height: 600px;
+    padding: 0.4em;
+  }
+
+  #effect h3 {
+    margin: 0;
+    padding: 0.4em;
+    text-align: center;
+  }

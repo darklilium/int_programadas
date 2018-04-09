@@ -1,0 +1,193 @@
+$primary: #F2F2F4;
+$chrs: #76798e;
+$secondary: #f5515f;
+
+
+.symbology_container{
+  display: flex;
+  background: $primary;
+  color: white;
+  width:20%;
+  height: auto;
+  position: absolute;
+  z-index: 11;
+  top: 0%;
+  margin: 1em;
+  flex-direction: column;
+  text-align: center;
+  color: $chrs;
+}
+
+.symbology_wrapper{
+  background: $primary;
+  height: 100%;
+}
+
+.symbology_title{
+  background: $secondary;
+  margin: 0px;
+  padding: 9px;
+  color: $primary;
+}
+
+
+.symbology_subtitle{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0.5em 0.5em 0em 0.5em;
+}
+
+.symbology_subtitle h3{
+  margin: 0;
+}
+
+.symbology_subtitle h4 {
+   margin: 0.8em 0 0 0;
+}
+
+.symbology_range{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.range{
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.2em 5em 1em 5em;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.range_red{
+  color: #64b964;
+}
+
+.range_orange{
+  color: #F7FE2E;
+}
+
+.range_yellow{
+  color: #5a9ba5;
+}
+
+.range_green{
+  color: #FF4000;
+}
+
+.range_img{
+  src: url('./images/tramo.png');
+}
+
+.help_icon{
+  color: red;
+  font-size: 1.5em;
+}
+
+.help_icon_text{
+  font-size: 15px;
+}
+
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+  .ui.container{
+    display: block;
+    max-width: 100%!important;
+    margin: 0 !important;
+  }
+
+  .symbology_container{
+    width: 45%;
+  }
+
+  .symbology_title h2 {
+    font-size: 10px;
+  }
+
+  .symbology_subtitle h3{
+      font-size: 9px;
+  }
+
+  .symbology_subtitle h4{
+    font-size: 9px;
+  }
+
+  .range{
+    font-size: 8px;
+    padding: 1em;
+  }
+}
+
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+  .ui.container{
+    display: block;
+    max-width: 100%!important;
+    margin: 0 !important;
+  }
+
+  .symbology_container{
+    width: 35%;
+  }
+
+  .symbology_title h2 {
+    font-size: 10px;
+  }
+
+  .symbology_subtitle h3{
+      font-size: 9px;
+  }
+
+  .symbology_subtitle h4{
+    font-size: 9px;
+  }
+
+  .range{
+    font-size: 9px;
+  }
+}
+
+
+
+@media only screen and (max-width: 991px) and (min-width: 768px){
+  .ui.container{
+    display: block;
+    max-width: 100%!important;
+    margin: 0 !important;
+  }
+
+  .symbology_container{
+    width: 30%;
+  }
+
+  .range{
+    font-size: 9px;
+  }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) and (orientation: portrait){
+  .symbology_container {
+    width: 35%;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px){
+  .symbology_container{
+    width: 30%;
+  }
+  .range{
+    font-size: 9px;
+    padding: 0.2em 10em 1em 8em;
+  }
+}
+
+
+@media only screen and (max-width: 1366px) and (min-width: 1200px) and (orientation: landscape){
+  .range{
+    font-size: 10px;
+    padding: 0.2em 5em 1em 5em;
+  }
+
+}

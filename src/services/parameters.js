@@ -1,0 +1,14 @@
+function getURLParameters(){
+
+  var params = {
+    comuna: getURLParameter('comuna')
+  }
+
+  return params;
+}
+
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [,""])[1].replace(/\+/g, '%20')) || null;
+}
+
+export {getURLParameters};
