@@ -1,3 +1,5 @@
+import {innerLogin} from '../services/login-service';
+
 const showNotification = (message) =>{
   return {
     type: "SHOW_NOTIFICATION",
@@ -19,5 +21,25 @@ const saveRegion = (region) =>{
   }
 }
 
+function userLogin (user,pass){
+  return dispatch => {
+    return innerLogin(user,pass)
+    .then(token => {
+        dispatch({
+          type: 'LOGGED_IN',
+          token
+        })
+      return token[2];
+    })
 
-export {showNotification, dismissNotification, saveRegion}
+    .catch(error=>{
+      dispatch({
+        type: 'NOT_LOGGED_IN',
+        error
+      })
+      return false;
+    })
+  }
+}
+
+export {showNotification, dismissNotification, saveRegion, userLogin}

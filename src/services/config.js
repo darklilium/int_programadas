@@ -18,6 +18,16 @@ const env = {
     SAVEAPPLICATIONNAME: '',
     BUILDFOR: 'EXTERNA'
 }
+
+var conf = ( () => {
+  var credentials = {
+    user: 'vialactea\\usrgis',
+    pass: 'N3L4y5HZ'
+  }
+
+  return () => {return credentials}
+})();
+
 /*
 //PROD
 const env = {
@@ -32,4 +42,5 @@ const env = {
 }
 */
 
+export {conf}
 export default env;

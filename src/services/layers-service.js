@@ -1,5 +1,6 @@
 import env from './config';
 import cookieHandler from 'cookie-handler';
+
 function getLayer(){
   var serviceMain, serviceURL;
 
@@ -12,8 +13,8 @@ function getLayer(){
     read_tokenURL(){
       return serviceMain + "tokens/generateToken";
     },
-    read_po_sectores(){
-      return serviceURL + "Interrupciones/PO_WEB_EXT/MapServer?f=json&token=" + cookieHandler.get('tkn');
+    read_po_sectores(token){
+      return serviceURL + "Interrupciones/PO_WEB_EXT/MapServer?f=json&token=" + token;
     }
 
   }

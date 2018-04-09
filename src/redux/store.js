@@ -1,33 +1,24 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import reducer from './reducer';
+import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import env from '../services/config';
 
-function showNotification(state,action){
-  //console.log(state,action,"hola from showNotification");
-  return Object.assign({}, state, {message: action.message});
-}
 
-function dismissNotification(state,action){
-  //console.log(action,state,"hola desde dismissNotification store");
-  return Object.assign({}, state, {visible: action.visible});
-}
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
 
-function saveRegion(state,action){
-   return Object.assign({}, state, {region: action.region});
-}
+export default function configureStore(initialState) {
 
-const reducer = (state, action) => {
-
-  if(action.type==="SHOW_NOTIFICATION"){
-    return showNotification(state,action);
+  if(env.MODE='DEVELOPMENT') {
+    return createStore(reducer, initialState, composeEnhancers(
+      applyMiddleware(thunk)
+    ));
+  }else{
+      return createStore(reducer, initialState, applyMiddleware(thunk));
   }
-  if(action.type==="DISMISS_NOTIFICATION"){
-    return dismissNotification(state,action);
-  }
-  if(action.type==="SAVE_REGION"){
-      return saveRegion(state,action);
-  }
-
-  return state;
 }
-
-export default createStore(reducer,{message: [], visible: true, region: []}, composeWithDevTools())
