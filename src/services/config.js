@@ -27,20 +27,28 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-
 /*
+
 //PROD
+
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'css/',
     ROUTEPATH: 'index.html',
-    ENVIRONMENT: 'DEVELOPMENT',
+    ENVIRONMENT: 'PRODUCTION',
     WEBSERVERADDRESS: "http://pchilquinta.cl/mapafallas",
     SAVEAPPLICATIONMODULE: "",
     SAVEAPPLICATIONNAME: '',
     BUILDFOR: 'EXTERNA'
 }
-*/
+var conf = ( () => {
+  var credentials = {
+    user: 'vialactea\\usrgis',
+    pass: 'N3L4y5HZ'
+  }
 
+  return () => {return credentials}
+})();
+*/
 export {conf}
 export default env;

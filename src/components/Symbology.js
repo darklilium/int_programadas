@@ -28,24 +28,20 @@ class Symbology extends Component{
   }
 
   render(){
+    const {nombreSector} = this.props;
 
     return (
 
       <div className="symbology_wrapper">
         {/* titulos*/}
-        <div className="symbology_title"><h3>INTERRUPCIONES DE SUMINISTRO POR SECTOR</h3></div>
+        <div className="symbology_title"><h4>INTERRUPCIONES PROGRAMADAS</h4></div>
+          <div className="symbology_title"><h4><b>SECTOR: {nombreSector}</b></h4></div>
         <div className="symbology_subtitle">
-
-          <h3>Simbología:</h3>
-          <h4>Porcentaje de clientes afectados:</h4>
+          {/*<p>Para conocer el horario estimado de reposición del suministro, debes hacer clic sobre la red.</p>*/}
         </div>
         {/*simbolos*/}
         <div className="symbology_image_range">
           <div className="symbology_range">
-            <div className="range"><Icon name='square' className="range_red"/><div className="img_red">00-25% Clientes Afectados</div></div>
-            <div className="range"><Icon name='square' className="range_orange"/><div className="img_orange">25-50% Clientes Afectados</div></div>
-            <div className="range"><Icon name='square' className="range_yellow"/><div className="img_yellow">50-75% Clientes Afectados</div></div>
-            <div className="range"><Icon name='square' className="range_green"/><div className="img_green">75-100% Clientes Afectados</div></div>
             <div className="range"><img src={env.CSSDIRECTORY+"images/tramo.png"}></img>
                 Red Eléctrica
                 <Tooltip
@@ -75,7 +71,9 @@ o	75-100%  NARANJO           FFDCB4
 */
   const mapStateToProps = state => {
     return {
-      region: state.region
+      region: state.region,
+      nombreSector: state.sector.nombre,
+      idsector: state.sector.idsector
     };
   }
 

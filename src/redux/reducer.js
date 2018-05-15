@@ -16,36 +16,73 @@ function login(state = {}, action) {
   }
 }
 
-/*
-if(action.type==="SHOW_NOTIFICATION"){
-  return showNotification(state,action);
-}
-if(action.type==="DISMISS_NOTIFICATION"){
-  return dismissNotification(state,action);
-}
-if(action.type==="SAVE_REGION"){
-    return saveRegion(state,action);
+function sector(state= {
+  idsector: '140694070',
+  nombre: 'PORTALES',
+  comuna: 'VALPARAISO',
+  location: ''
+}, action){
+
+  switch (action.type) {
+    case 'GOT_SECTOR_LOCATION':
+        return {...state,
+          location: action.location.geometry,
+          idsector: action.location.attributes.ID_SW,
+          nombre: action.location.attributes.NOMBRE_SECTOR}
+    break;
+
+    case 'ERROR_GETTING_SECTOR_LOCATION':
+      return {...state, location: false}
+    break;
+
+    default:
+      return state;
+  }
 }
 
-function showNotification(state,action){
-  //console.log(state,action,"hola from showNotification");
-  return Object.assign({}, state, {message: action.message});
+function search(state = {
+  selectedSearch: '',
+  interrupted: 'REALICE BÚSQUEDA'
+}, action){
+
+    switch (action.type) {
+      case 'SELECTED_VALUE_SEARCH':
+          return {...state, selectedSearch: action.value}
+      break;
+
+      case 'INTERRUPTED':
+        return {...state, selectedSearch: action.value, interrupted: action.interrupted}
+      break;
+
+      case 'NOT_INTERRUPTED':
+        return {...state, selectedSearch: action.value, interrupted: action.ok}
+      break;
+
+      default:
+        return state;
+    }
 }
 
-function dismissNotification(state,action){
-  //console.log(action,state,"hola desde dismissNotification store");
-  return Object.assign({}, state, {visible: action.visible});
+function message(state = {
+  message: '',
+  visible: false
+}, action){
+  switch (action.type) {
+    case 'SHOW_NOTIFICATION':
+      return {...state, message: action.message, visible: true}
+    break;
+
+    case 'DISMISS_NOTIFICATION':
+      return {...state, message: '', visible: action.visible}
+    break;
+
+    default:
+      return state;
+  }
 }
-
-function saveRegion(state,action){
-   return Object.assign({}, state, {region: action.region});
-}
-
-*/
-
 
 const appReducer = combineReducers({
-  login
+  login, sector, search, message
 });
 
 const rootReducer = (state,action) => {

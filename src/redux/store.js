@@ -22,3 +22,9 @@ export default function configureStore(initialState) {
       return createStore(reducer, initialState, applyMiddleware(thunk));
   }
 }
+
+/*
+export default function configureStore(initialState) {
+      return createStore(reducer, initialState, applyMiddleware(thunk));
+}
+*/

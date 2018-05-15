@@ -12,7 +12,7 @@ class BottomSidebar extends Component {
       return (
         <Message
           onDismiss={this.props.handleDismiss}
-          header='¡Bienvenido!'
+          header='!'
           content= {this.props.message}
           color= 'black'
         />

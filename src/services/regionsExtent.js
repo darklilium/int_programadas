@@ -1,7 +1,26 @@
 
+
+import makeSymbol from './makeSymbol';
+import Query from 'esri/tasks/query';
+import QueryTask from 'esri/tasks/QueryTask';
+import layers from './layers-service';
+import Graphic from 'esri/graphic';
+import GraphicsLayer from 'esri/layers/GraphicsLayer';
+import Extent from 'esri/geometry/Extent';
+
+var gLayerSector = new GraphicsLayer();
+
 function getComunaExtent(comuna){
+
   var promise = new Promise((resolve,reject)=>{
-      resolve(regionsExtent().filter(c=>{ return c[0]==comuna;}));
+
+      resolve(
+        regionsExtent().filter(c=>{
+          //console.log(c[0], comuna);
+          return c[0]==comuna;
+        })
+      );
+
   })
   return promise;
 }
@@ -41,7 +60,7 @@ function regionsExtent(){
     ["SAN FELIPE", -70.7208,-32.75,13],
     ["SANTA MARIA", -70.6587,-32.747,13],
     ["SANTO DOMINGO", -71.6309,-33.6366,13],
-    ["VALPARAISO",-71.6272,-33.0394,12],
+    ["VALPARAISO",-71.6272,-33.0394,13],
     ["VILLA ALEMANA", -71.3734,-33.0476,13],
     ["VIÑA DEL MAR",-71.5523, -33.0245, 13],
     ["ZAPALLAR", -71.4589 , -32.5536,13],
@@ -61,4 +80,25 @@ function regionsExtent(){
   ];
 
 }
-export {regionsExtent, getComunaExtent};
+
+function getSector(idsector, token){
+  var promise = new Promise((resolve, reject)=>{
+
+    var qTask = new QueryTask(layers.read_po_sectores_programados(token));
+    var q = new Query();
+
+    q.returnGeometry = true;
+    q.outFields=["*"];
+    q.where = `ID_SW='${idsector}'`;
+
+    qTask.execute(q, (featureSet)=>{
+      console.log(featureSet.features,"sectoresgetsector");
+      resolve(featureSet.features[0])
+    }, (error)=>{
+      console.log(error,"Error doing query for getSector");
+      reject(error)
+    });
+  })
+  return promise;
+}
+export {regionsExtent, getComunaExtent, getSector};
