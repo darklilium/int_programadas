@@ -110,6 +110,20 @@ $secondary: #f5515f;
   font-size: 15px;
 }
 
+//01.08.2018
+.symbology_mobile{
+  display: flex;
+  z-index: 12;
+  top: 0%;
+  position: absolute;
+  margin: 1.2em;
+  visibility: visible;
+}
+
+.btn_symbology_mobile{
+  color: white !important;
+  background-color: $secondary !important;
+}
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {
   .ui.container{

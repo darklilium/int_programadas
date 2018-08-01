@@ -116,4 +116,15 @@ function searchDismiss(visible){
   }
 }
 
-export {showNotification, dismissNotification, saveRegion, userLogin, getSectorLocation, searchValue, searchDismiss}
+//01.08.2018
+function toggleMobileVisibility(visible){
+  return dispatch => {
+    dispatch({
+      type: 'TOGGLE_MOBILE_VISIBILITY',
+      visible
+    })
+  }
+}
+
+
+export {showNotification, dismissNotification, saveRegion, userLogin, getSectorLocation, searchValue, searchDismiss, toggleMobileVisibility}

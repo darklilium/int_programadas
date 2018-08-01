@@ -82,8 +82,22 @@ function message(state = {
   }
 }
 
+//1/08/2018
+function mobile(state={
+  symbologyVisibility: true
+},action) {
+  switch (action.type) {
+    case 'TOGGLE_MOBILE_VISIBILITY':
+        return {...state, symbologyVisibility: action.visible}
+    break;
+
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
-  login, sector, search, message
+  login, sector, search, message, mobile
 });
 
 const rootReducer = (state,action) => {

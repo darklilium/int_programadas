@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from '../css/myStyles.scss';
 
-import {Container, Divider, Message} from 'semantic-ui-react';
+import {Container, Divider, Message, Icon, Button} from 'semantic-ui-react';
 import ToggleSymbology from './ToggleSymbology';
 import BottomSidebar from './BottomSidebar';
 import Symbology from './Symbology';
 import {userLogin, sectorInfo, getSectorLocation,
-  showNotification, dismissNotification, saveRegion} from '../redux/actions';
+  showNotification, dismissNotification, saveRegion, toggleMobileVisibility} from '../redux/actions';
 import {connect} from 'react-redux';
 
 import {regionsExtent, getComunaExtent}  from '../services/regionsExtent';
@@ -32,6 +32,7 @@ import VectorTileLayer from "esri/layers/VectorTileLayer";
 import CustomSearch from './CustomSearch';
 import mapa from '../services/map_service';
 import Search from 'esri/dijit/Search';
+import $ from 'jquery';
 
 class Main extends React.Component {
   constructor(props) {
@@ -228,6 +229,21 @@ class Main extends React.Component {
     }
   }
 
+  SymbologyVisibility(){
+    const {toggleMobileVisibility, mobile} = this.props;
+
+    if(mobile){
+        toggleMobileVisibility(false)
+        $('.symbology_container').css('visibility','hidden')
+
+    }else{
+        toggleMobileVisibility(true)
+        $('.symbology_container').css('visibility','visible')
+    }
+
+
+  }
+
   render(){
     var {searchValue, message, interrupted} = this.props;
     var msg = null;
@@ -258,6 +274,12 @@ class Main extends React.Component {
       <Container className="map_container">
         <div id="map"></div>
 
+        <div className="symbology_mobile">
+          <Button icon className="btn_symbology_mobile" onClick={this.SymbologyVisibility.bind(this)}>
+             <Icon name='bars'/>
+          </Button>
+        </div>
+
         <div className="symbology_container">
           <Symbology />
             <div className="address_container">
@@ -283,7 +305,8 @@ const mapDispatchToProps = (dispatch) =>{
     login_in: (user,pass) => dispatch(userLogin(user,pass)),
     sectorLocation: (id,token) => dispatch(getSectorLocation(id,token)),
     showNotif: (message) => dispatch(showNotification(message)),
-    dismissNotif: (value) => dispatch(dismissNotification(value))
+    dismissNotif: (value) => dispatch(dismissNotification(value)),
+    toggleMobileVisibility: (value) => dispatch(toggleMobileVisibility(value))
   }
 }
 
@@ -293,7 +316,8 @@ const mapStateToProps = state => {
     sector: state.sector,
     searchValue: state.search.selectedSearch,
     interrupted: state.search.interrupted,
-    message: state.message
+    message: state.message,
+    mobile: state.mobile.symbologyVisibility
   }
 }
 
