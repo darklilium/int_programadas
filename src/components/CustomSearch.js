@@ -2,7 +2,7 @@ import store from '../redux/store';
 import React,  { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import {saveRegion, searchValue, changeActiveIndex} from '../redux/actions';
+import {saveRegion, searchValue, changeActiveIndex, searchDismiss} from '../redux/actions';
 import { Icon, Tab } from 'semantic-ui-react';
 import {Container, Form, Radio, Input, Button} from 'semantic-ui-react';
 import env from '../services/config';
@@ -29,12 +29,12 @@ class CustomSearch extends Component{
     nisSearch(this.state.inputValue, token);
   }
   render(){
-    const {nombreSector, searchValue, handleSearch} = this.props;
+    const {nombreSector, searchValue, handleSearch, dismiss} = this.props;
 
     return (
 
       <div className="symbology_wrapper custom_search_div">
-      
+
         <div className="symbology_image_range">
           <div className="symbology_range">
              <div className="custom_search_group">
@@ -43,12 +43,19 @@ class CustomSearch extends Component{
                  icon='search'
                  content='Buscar'
                  onClick={ this.handleClick }
-                 className="border_ btn_search_color"
+                 className="border_"
               />}
-              placeholder='NIS'
+              placeholder='Número de cliente'
               className="border_"
               type="number"
-              onChange={e=> this.state.inputValue = e.target.value} />
+              min="0"
+              max="999999"
+              onChange={
+                e=> {
+                  this.state.inputValue = e.target.value
+                  dismiss(false)
+                }
+                } />
              </div>
           </div>
         </div>
@@ -60,8 +67,8 @@ class CustomSearch extends Component{
 
   const mapDispatchToProps = dispatch => {
     return {
-      nisSearch: (value, token) => dispatch(searchValue(value, token))
-
+      nisSearch: (value, token) => dispatch(searchValue(value, token)),
+      dismiss: (visible) => dispatch(searchDismiss(visible))
     }
   }
   const mapStateToProps = state => {

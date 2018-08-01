@@ -67,3 +67,20 @@ margin-bottom: 1em;
 .ui.message{
   width: 100%;
 }
+
+
+.ui.horizontal.divider{
+  text-transform: capitalize;
+}
+
+
+.ui.input{
+  width: 100%;
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait){
+  .ui.input>input{
+      width: 50% !important;
+  }
+
+}

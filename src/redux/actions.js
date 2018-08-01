@@ -57,7 +57,7 @@ function getSectorLocation(idsector, token){
   return dispatch => {
     return getSector(idsector,token)
     .then(location =>{
-      console.log(location,"location");
+      //console.log(location,"location");
       dispatch({
         type: 'GOT_SECTOR_LOCATION',
         location
@@ -79,7 +79,7 @@ function searchValue(value, token) {
   return dispatch => {
     return searchInterruptions(value,token)
     .then(interrupted=>{
-      console.log(interrupted,"respuesta searchInterruptions");
+      //console.log(interrupted,"respuesta searchInterruptions");
       dispatch({
         type: 'INTERRUPTED',
         value, interrupted
@@ -91,7 +91,7 @@ function searchValue(value, token) {
       })
 
     }).catch(ok=>{
-      console.log(ok);
+      //console.log(ok);
       dispatch({
         type: 'NOT_INTERRUPTED',
         value, ok
@@ -105,6 +105,15 @@ function searchValue(value, token) {
   }
 }
 
+function searchDismiss(visible){
+  return dispatch => {
 
+    dispatch({
+      type: 'DISMISS_NOTIFICATION',
+      visible
+    })
 
-export {showNotification, dismissNotification, saveRegion, userLogin, getSectorLocation, searchValue}
+  }
+}
+
+export {showNotification, dismissNotification, saveRegion, userLogin, getSectorLocation, searchValue, searchDismiss}

@@ -41,20 +41,10 @@ class Symbology extends Component{
         </div>
         {/*simbolos*/}
         <div className="symbology_image_range">
-          <div className="symbology_range">
-            <div className="range"><img src={env.CSSDIRECTORY+"images/tramo.png"}></img>
-                Red Eléctrica
-                <Tooltip
-                  visible={this.state.visible}
-                  animation="zoom"
-                  onVisibleChange={this.onVisibleChange}
-                  trigger="hover"
-                  overlay={<span style={{fontSize: '15px'}}>Selecciona la red para conocer el tiempo estimado de reposición del servicio.</span>}
-                  ><a href="#" className="help_icon" onClick={preventDefault}><Icon name='help circle'/></a>
-                </Tooltip>
-            </div>
+        <p>Haz click sobre la red para conocer la hora estimada de reposición.</p>
+        <div className="symbol_"><img src={env.CSSDIRECTORY+"images/tramo.png"}></img></div>
 
-          </div>
+        
         </div>
       </div>
 

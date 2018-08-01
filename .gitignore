@@ -1,0 +1,6 @@
+arcgis_js_api
+dist
+node_modules
+gulpfile.js
+startup.sh
+startupTreeDir.sh

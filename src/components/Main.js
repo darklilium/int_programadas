@@ -33,27 +33,6 @@ import CustomSearch from './CustomSearch';
 import mapa from '../services/map_service';
 import Search from 'esri/dijit/Search';
 
-
-
-export class SearchNIS extends React.Component {
-    render() {
-        return (
-          <div id="search2">nis</div>
-        );
-    }
-
-}
-
-export class SearchAddress extends React.Component {
-
-    render() {
-        return (
-          <div id="search"></div>
-        );
-    }
-
-}
-
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -63,7 +42,7 @@ class Main extends React.Component {
   }
 
   dev () {
-    console.log("DEVELOPMENT");
+    //console.log("DEVELOPMENT");
     var {login_in, sector} = this.props;
 
     var comuna = getComunaExtent(sector.comuna)
@@ -80,7 +59,7 @@ class Main extends React.Component {
         var login = login_in(conf().user,conf().pass)
         .then(logged=>{
 
-          const {token, sectorLocation, sector} = this.props;
+          var {token, sectorLocation, sector} = this.props;
 
             if(logged!=false){
 
@@ -98,7 +77,24 @@ class Main extends React.Component {
 
                 sectores.setLayerDefinitions(layerDefinitions);
                 //var vtlayer = new VectorTileLayer("http://www.arcgis.com/sharing/rest/content/items/75f4dfdff19e445395653121a95a85db/resources/styles/root.json?f=pjson");
-                map.addLayers([sectores])
+
+                var sectoresTramos = new ArcGISDynamicMapServiceLayer(getLayer.read_sectores_programados_tramos(token),{
+                  id:"po_sectores_tramos"
+                });
+
+                sectoresTramos.setInfoTemplates({
+                  3: {infoTemplate: getInfoTemplate.getTramos()}
+                });
+                sectoresTramos.refreshInterval = 1;
+                sectoresTramos.setImageFormat("png32");
+
+                sectoresTramos.setVisibleLayers([3]);
+                var layerDefinitions2 = [];
+                layerDefinitions[3] = `WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='${sector.idDesconexion}'`;
+
+                sectoresTramos.setLayerDefinitions(layerDefinitions2);
+
+                map.addLayers([sectores, sectoresTramos])
 
                 //console.log(this.props.sector.location,"?");
                 var newExtent = new Extent(this.props.sector.location.getExtent())
@@ -112,11 +108,11 @@ class Main extends React.Component {
                 map.centerAndZoom(centroid,15)
 
                 }else{
-                  console.log("no located");
+                  //console.log("no located");
                 }
               })
               .catch(error=>{
-                console.log(error,"aolasd");
+                //console.log(error,"error with login query");
               });
 
               /*var toggle = new BasemapToggle({
@@ -126,21 +122,21 @@ class Main extends React.Component {
               toggle.startup();
               */
             }else{
-              console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
+              //console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
             }
         })
         .catch(e=>{
-          console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
+          //console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
         });
     });
   }
 
   prod (){
-      console.log("PRODUCTION");
+      //console.log("PRODUCTION");
       var {login_in, sector} = this.props;
       var params = getURLParameters();
 
-      var comuna = getComunaExtent(params.comuna)
+      var comuna = getComunaExtent('VALPARAISO')
       .then(r=>{
           var map = mapa.createMap([r[0][1] ,r[0][2]],r[0][3]);
           var search = new Search({
@@ -153,7 +149,7 @@ class Main extends React.Component {
           var login = login_in(conf().user,conf().pass)
           .then(logged=>{
 
-            const {token, sectorLocation, sector} = this.props;
+            var {token, sectorLocation, sector} = this.props;
 
               if(logged!=false){
 
@@ -167,11 +163,27 @@ class Main extends React.Component {
                   });
                   sectores.setVisibleLayers([0]);
                   var layerDefinitions = [];
-                  layerDefinitions[0] = `ID_SW='${sector.idsector}'`;
+                  layerDefinitions[0] = `ID_SW='${params.idsector}'`;
 
                   sectores.setLayerDefinitions(layerDefinitions);
 
-                  map.addLayers([sectores])
+                  //Agregar tramos de sector interrumpido basado en id_desconexion:
+                  var sectoresTramos = new ArcGISDynamicMapServiceLayer(getLayer.read_sectores_programados_tramos(token),{
+                    id:"po_sectores_tramos"
+                  });
+                  sectoresTramos.setVisibleLayers([3]);
+                  var layerDefinitions2 = [];
+                  layerDefinitions[3] = `WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='${params.idsector}'`;
+
+                  sectoresTramos.setLayerDefinitions(layerDefinitions2);
+
+                  sectoresTramos.setInfoTemplates({
+                    3: {infoTemplate: getInfoTemplate.getTramos()}
+                  });
+                  sectoresTramos.refreshInterval = 1;
+                  sectoresTramos.setImageFormat("png32");
+
+                  map.addLayers([sectores, sectoresTramos])
 
                   //console.log(this.props.sector.location,"?");
                   var newExtent = new Extent(this.props.sector.location.getExtent())
@@ -185,11 +197,11 @@ class Main extends React.Component {
                   map.centerAndZoom(centroid,15)
 
                   }else{
-                    console.log("no located");
+                    //console.log("no located");
                   }
                 })
                 .catch(error=>{
-                  console.log(error,"aolasd");
+                  //console.log(error,"aolasd");
                 });
 
                 var toggle = new BasemapToggle({
@@ -199,11 +211,11 @@ class Main extends React.Component {
                 toggle.startup();
 
               }else{
-                console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
+                //console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
               }
           })
           .catch(e=>{
-            console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
+            //console.log("Problemas al realizar login, favor contacte al desarrollador/a.");
           });
       });
   }
@@ -219,23 +231,28 @@ class Main extends React.Component {
   render(){
     var {searchValue, message, interrupted} = this.props;
     var msg = null;
-    switch (interrupted) {
-      case 'INTERRUMPIDO':
-          msg = <Message negative color='red'>
-              {interrupted}
-            </Message>
-      break;
-      case 'SIN PROBLEMAS':
-          msg = <Message positive color='green'>
-              {interrupted}
-            </Message>
-      break;
-      case 'NO SE ENCUENTRA NIS':
-          msg = <Message info color='blue'>
-              {interrupted}
-            </Message>
-      break;
 
+    if(message.visible){
+
+      switch (interrupted) {
+        case 'INTERRUMPIDO':
+            msg = <Message visible={message.visible} negative color='red'>
+                {interrupted}
+              </Message>
+        break;
+        case 'SIN INTERRUPCIÓN':
+            msg = <Message visible={message.visible} positive color='green'>
+                {interrupted}
+              </Message>
+        break;
+        case 'NO SE ENCUENTRA NÚMERO DE CLIENTE':
+            msg = <Message visible={message.visible} info color='blue'>
+                {interrupted}
+              </Message>
+        break;
+      }
+    }else{
+      msg = null;
     }
     return (
       <Container className="map_container">
@@ -244,9 +261,9 @@ class Main extends React.Component {
         <div className="symbology_container">
           <Symbology />
             <div className="address_container">
-            <div className="symbology_title"><h4>REVISA EL ESTADO DE TU SUMINISTRO</h4></div>
+            <div className="symbology_title"><h4>Revisa el estado de tu suministro</h4></div>
               <div id="search"></div>
-              <Divider horizontal>Y/O Busca tu NIS</Divider>
+              <Divider horizontal>O busca tu número de cliente</Divider>
               <CustomSearch />
               {msg}
           </div>
@@ -264,7 +281,9 @@ class Main extends React.Component {
 const mapDispatchToProps = (dispatch) =>{
   return {
     login_in: (user,pass) => dispatch(userLogin(user,pass)),
-    sectorLocation: (id,token) => dispatch(getSectorLocation(id,token))
+    sectorLocation: (id,token) => dispatch(getSectorLocation(id,token)),
+    showNotif: (message) => dispatch(showNotification(message)),
+    dismissNotif: (value) => dispatch(dismissNotification(value))
   }
 }
 

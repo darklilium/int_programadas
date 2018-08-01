@@ -1,8 +1,9 @@
 function getURLParameters(){
 
   var params = {
-    comuna: getURLParameter('comuna'),
-    idsector: getURLParameter('idsector')
+    //comuna: getURLParameter('comuna'),
+    idsector: getURLParameter('idsector'),
+    idDesconexion: getURLParameter('id_desconexion')
   }
 
   return params;

@@ -35,7 +35,7 @@ function innerLogin(user,pass){
       resolve([true,'OK', token]);
     })
     .fail(error => {
-      console.log("Problem:" , error);
+      //console.log("Problem:" , error);
       reject([false,`Problema ${error}`]);
     });
   });

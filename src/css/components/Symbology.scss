@@ -2,6 +2,13 @@ $primary: #F2F2F4;
 $chrs: #76798e;
 $secondary: #f5515f;
 
+.symbology_container2{
+  margin-top: 1em;
+}
+
+.report_button{
+  width: 100%;
+}
 
 .symbology_container{
   display: flex;
@@ -26,7 +33,7 @@ $secondary: #f5515f;
 .symbology_title{
   background: $secondary;
   margin: 0px;
-  padding: 5px;
+  padding: 9px;
   color: $primary;
 }
 
@@ -45,10 +52,23 @@ $secondary: #f5515f;
    margin: 0.8em 0 0 0;
 }
 
+
+.symbology_image_range{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.symbol_{
+  display: flex;
+  padding: 0em 1em 1em 0.5em
+}
+
 .symbology_range{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+    width: 100%;
 }
 
 .range{
@@ -99,7 +119,8 @@ $secondary: #f5515f;
   }
 
   .symbology_container{
-    width: 45%;
+    //width: 45%;
+    width: 85%;
   }
 
   .symbology_title h2 {
@@ -168,8 +189,10 @@ $secondary: #f5515f;
 
 @media only screen and (max-width: 991px) and (min-width: 768px) and (orientation: portrait){
   .symbology_container {
-    width: 35%;
+    //width: 35%;
+    width: 40%;
   }
+
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 992px){
@@ -187,6 +210,22 @@ $secondary: #f5515f;
   .range{
     font-size: 13px;
     padding: 0.2em 5em 1em 5em;
+  }
+
+}
+
+
+@media only screen and (max-width: 1440px) and (min-width: 1367px) and (orientation: landscape){
+  .symbology_container{
+    width: 22%;
+  }
+
+}
+
+
+@media only screen and (max-width: 1920px) and (min-width: 1441px) {
+  .symbology_container{
+    width: 17%;
   }
 
 }

@@ -11,6 +11,20 @@ function makeSymbol(){
         new Color([255,0,0]), 2),new Color([255,255,0,0.25])
       );
       return mySymbol;
+    },
+    makePoint(){
+      var mySymbol = new esri.symbol.SimpleMarkerSymbol(
+        esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,
+        30,
+        new esri.symbol.SimpleLineSymbol(
+          esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+          new esri.Color([0, 40, 255, 0.9]),
+          1
+        ),
+        new esri.Color([255, 51, 255, 0.7])
+      );
+
+      return mySymbol;
     }
   }
 }

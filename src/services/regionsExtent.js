@@ -16,7 +16,7 @@ function getComunaExtent(comuna){
 
       resolve(
         regionsExtent().filter(c=>{
-          //console.log(c[0], comuna);
+          ////console.log(c[0], comuna);
           return c[0]==comuna;
         })
       );
@@ -92,10 +92,10 @@ function getSector(idsector, token){
     q.where = `ID_SW='${idsector}'`;
 
     qTask.execute(q, (featureSet)=>{
-      console.log(featureSet.features,"sectoresgetsector");
+      //console.log(featureSet.features,"sectoresgetsector");
       resolve(featureSet.features[0])
     }, (error)=>{
-      console.log(error,"Error doing query for getSector");
+      //console.log(error,"Error doing query for getSector");
       reject(error)
     });
   })
