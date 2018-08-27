@@ -23,6 +23,7 @@ $secondary: #f5515f;
   flex-direction: column;
   text-align: center;
   color: $chrs;
+  visibility: hidden;
 }
 
 .symbology_wrapper{
@@ -116,13 +117,17 @@ $secondary: #f5515f;
   z-index: 12;
   top: 0%;
   position: absolute;
-  margin: 1.2em;
+  margin: 1.1em;
   visibility: visible;
 }
 
 .btn_symbology_mobile{
   color: white !important;
   background-color: $secondary !important;
+}
+
+.symbology_image_range > p {
+  padding: 1em;
 }
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {
@@ -147,6 +152,11 @@ $secondary: #f5515f;
 
   .symbology_subtitle h4{
     font-size: 9px;
+    
+  }
+
+  .symbology_title > h4 {
+    padding-left: 1em;
   }
 
   .range{

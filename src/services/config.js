@@ -1,13 +1,13 @@
 /*
-APP: Sectores
+APP: InterrupcionesProgramadas
 Author: Evelyn Hernandez
-Version: 0.8
-Date: 2018-01-22
+Version: 0.7
+Date: 2018-08-23
 */
 
 
 //DEV
-
+/*
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'src/css/',
@@ -16,7 +16,7 @@ const env = {
     WEBSERVERADDRESS: "http://pchilquinta.cl/mapafallas",
     SAVEAPPLICATIONMODULE: "",
     SAVEAPPLICATIONNAME: '',
-    BUILDFOR: 'EXTERNA'
+    BUILDFOR: 'INTERNA'
 }
 
 var conf = ( () => {
@@ -27,8 +27,7 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-
-
+*/
 
 //DESA SERV CHQ
 /*
@@ -53,9 +52,8 @@ var conf = ( () => {
 })();
 */
 
-
 //PROD serv chq
-/*
+
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'css/',
@@ -66,8 +64,8 @@ const env = {
     SAVEAPPLICATIONNAME: '',
     BUILDFOR: 'EXTERNA'
 }
-*/
-/*
+
+
 var conf = ( () => {
   var credentials = {
     user: 'vialactea\\usrgis',
@@ -77,6 +75,5 @@ var conf = ( () => {
   return () => {return credentials}
 })();
 
-*/
 export {conf}
 export default env;

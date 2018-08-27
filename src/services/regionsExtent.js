@@ -7,6 +7,9 @@ import layers from './layers-service';
 import Graphic from 'esri/graphic';
 import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import Extent from 'esri/geometry/Extent';
+import graphicsUtils from 'esri/graphicsUtils';
+
+export var gLayerTramos = new GraphicsLayer();
 
 var gLayerSector = new GraphicsLayer();
 
@@ -101,4 +104,34 @@ function getSector(idsector, token){
   })
   return promise;
 }
-export {regionsExtent, getComunaExtent, getSector};
+
+function getTramosInterrumpidos(sector){
+  var promise = new Promise((resolve, reject)=>{
+
+    let mySymbol = makeSymbol.makeLine();
+
+    var qTask = new QueryTask(layers.read_redes_interrumpidas());
+    var q = new Query();
+
+    q.returnGeometry = true;
+    q.outFields=["*"];
+    q.where = `GISRED.DBO.TEMP_SDD_DESCONEXIONES.id_desconexion='${sector}'`;
+
+    qTask.execute(q, (featureSet)=>{
+      var graphicsArray = featureSet.features.map(f=>{
+        return new Graphic(f.geometry, mySymbol, f.attributes)
+      });
+
+      var extent = esri.graphicsExtent(graphicsArray); 
+      
+      resolve([featureSet, extent])
+    }, (error)=>{
+      console.log(error,"Error doing query for getSector");
+      reject(error)
+    });
+
+  });
+
+  return promise;
+}
+export {regionsExtent, getComunaExtent, getSector, getTramosInterrumpidos};

@@ -24,9 +24,9 @@ const saveRegion = (region) =>{
   }
 }
 
-function userLogin (user,pass){
+function userLogin (){
   return dispatch => {
-    return innerLogin(user,pass)
+    return innerLogin()
     .then(token => {
         dispatch({
           type: 'LOGGED_IN',
@@ -126,5 +126,33 @@ function toggleMobileVisibility(visible){
   }
 }
 
+/*loader*/
+function toggleLoaderVisibility(visible){
+  return dispatch => {
+    dispatch({
+      type: 'TOGGLE_LOADER_VISIBILITY',
+      visible
+    })
+  }
+}
 
-export {showNotification, dismissNotification, saveRegion, userLogin, getSectorLocation, searchValue, searchDismiss, toggleMobileVisibility}
+function toggleLoaderMessage(message){
+  return dispatch => {
+    dispatch({
+      type: 'TOGGLE_LOADER_MESSAGE',
+      message
+    })
+  }
+}
+
+
+export {showNotification, 
+  dismissNotification, 
+  saveRegion, 
+  userLogin, 
+  getSectorLocation, 
+  searchValue, 
+  searchDismiss, 
+  toggleMobileVisibility, 
+  toggleLoaderVisibility,
+  toggleLoaderMessage}

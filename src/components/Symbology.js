@@ -35,14 +35,13 @@ class Symbology extends Component{
       <div className="symbology_wrapper">
         {/* titulos*/}
         <div className="symbology_title"><h4>INTERRUPCIONES PROGRAMADAS</h4></div>
-          <div className="symbology_title"><h4><b>SECTOR: {nombreSector}</b></h4></div>
-        <div className="symbology_subtitle">
-          {/*<p>Para conocer el horario estimado de reposición del suministro, debes hacer clic sobre la red.</p>*/}
-        </div>
+        {/* <div className="symbology_title"><h4><b>SECTOR: {nombreSector}</b></h4></div> */}
+        
         {/*simbolos*/}
         <div className="symbology_image_range">
-        <p>Haz click sobre la red para conocer la hora estimada de reposición.</p>
-        <div className="symbol_"><img src={env.CSSDIRECTORY+"images/tramo.png"}></img></div>
+        <p>Haz click sobre el ícono  <img src={env.CSSDIRECTORY+"images/gis_icon.png"}></img> para conocer la hora estimada de reposición.</p>
+      
+        {/*<div className="symbol_"><img src={env.CSSDIRECTORY+"images/tramo.png"}></img></div>*/}
 
         
         </div>

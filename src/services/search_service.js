@@ -6,6 +6,7 @@ import Graphic from 'esri/graphic';
 import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import makeSymbol from './makeSymbol';
 
+
 var gLayerFind = new GraphicsLayer();
 
 function searchInterruptions(nis,token){

@@ -31,6 +31,10 @@ body {
     margin: 0.5em;
 }
 
+.wrapper_loader{
+  position: initial !important;
+}
+
 @import "./components/togglerSymbology";
 @import "./components/messageNotification";
 @import "./components/Symbology";

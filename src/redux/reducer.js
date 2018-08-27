@@ -21,7 +21,7 @@ function sector(state= {
   nombre: '',
   comuna: 'VALPARAISO',
   location: '',
-  idDesconexion: 'DX9631'
+  idDesconexion: 'DX20935'
 }, action){
 
   switch (action.type) {
@@ -96,8 +96,27 @@ function mobile(state={
   }
 }
 
+function loader(state = {
+  visible: true,
+  message: 'Cargando...'
+}, action) {
+  switch (action.type) {
+    case 'TOGGLE_LOADER_VISIBILITY':
+      return { ...state, visible: action.visible }
+      break;
+
+    case 'TOGGLE_LOADER_MESSAGE':
+      return { ...state, message: action.message }
+      break;
+
+    default:
+      return state;
+  }
+}
+
+
 const appReducer = combineReducers({
-  login, sector, search, message, mobile
+  login, sector, search, message, mobile, loader
 });
 
 const rootReducer = (state,action) => {

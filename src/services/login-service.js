@@ -2,19 +2,21 @@
 import getLayer from './layers-service';
 import cookieHandler from 'cookie-handler';
 import $ from 'jquery';
+import kernel from "esri/kernel";
+import {conf} from '../services/config';
 
-function innerLogin(user,pass){
-  var promise = new Promise((resolve,reject)=>{
-
-    const url = getLayer.read_tokenURL();
+function innerLogin() {
+  var promise = new Promise((resolve, reject) => {
 
     const data = {
-      username: user,
-      password: pass,
+      username: conf().user,
+      password: conf().pass,
       client: 'requestip',
       expiration: 1440,
       format: 'jsonp'
     };
+
+    const url = getLayer.read_tokenURL();
 
     $.ajax({
       method: 'POST',
@@ -22,25 +24,35 @@ function innerLogin(user,pass){
       data: data,
       dataType: 'html'
     })
-    .done(token =>{
-      if(token.indexOf('Exception') >= 0) {
-        reject([false,'Login incorrecto, intente nuevamente']);
-      }
-      if (token.indexOf('error') >= 0){
-        reject([false,'Login incorrecto, intente nuevamente']);
+      .done(token => {
 
-      }
+        if (token.indexOf('Exception') >= 0) {
+          reject([false, 'Login incorrecto, intente nuevamente']);
+        }
+        if (token.indexOf('error') >= 0) {
+          reject([false, 'Login incorrecto, intente nuevamente']);
 
-      cookieHandler.set('tkn',token);
-      resolve([true,'OK', token]);
-    })
-    .fail(error => {
-      //console.log("Problem:" , error);
-      reject([false,`Problema ${error}`]);
-    });
+        }
+        
+        var t = {
+          "server": getLayer.read_service_url(),
+          "userId": conf().user,
+          "token": token,
+          "ssl": false,
+          "expires": 7200
+        };
+
+        kernel.id.registerToken(t);
+       
+        resolve([true, 'OK', token]);
+      })
+      .fail(error => {
+        //console.log("Problem:" , error);
+        reject([false, `Problema ${error}`]);
+      });
   });
 
   return promise;
 }
 
-export {innerLogin}
+export { innerLogin }

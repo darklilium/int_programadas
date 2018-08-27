@@ -25,7 +25,17 @@ function makeSymbol(){
       );
 
       return mySymbol;
-    }
+    },
+    makeLine(){
+      var mySymbol = new esri.symbol.CartographicLineSymbol(
+        esri.symbol.CartographicLineSymbol.STYLE_SOLID,
+        new esri.Color([0,0,255,0.9]), 15,
+        esri.symbol.CartographicLineSymbol.CAP_ROUND,
+        esri.symbol.CartographicLineSymbol.JOIN_MITER, 5
+      );
+
+      return mySymbol;
+    },
   }
 }
 export default makeSymbol();
