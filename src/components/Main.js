@@ -51,7 +51,7 @@ class Main extends React.Component {
        
         var sectores_programados = new ArcGISDynamicMapServiceLayer(getLayer.read_po_sectores_programados_dyn(), { id: "sectores_prog" })
         var layerDefinitions = [];
-        layerDefinitions[0] = "GISRED.DBO.TEMP_SDD_DESCONEXIONES.id_desconexion='" + sector.idDesconexion + "'";
+        layerDefinitions[0] = "WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='" + sector.idDesconexion + "'";
         sectores_programados.setVisibleLayers = [0];
         sectores_programados.setLayerDefinitions(layerDefinitions);
         map.addLayer(sectores_programados);
@@ -101,7 +101,7 @@ class Main extends React.Component {
       
         var sectores_programados = new ArcGISDynamicMapServiceLayer(getLayer.read_po_sectores_programados_dyn(), { id: "sectores_prog" })
         var layerDefinitions = [];
-        layerDefinitions[0] = "GISRED.DBO.TEMP_SDD_DESCONEXIONES.id_desconexion='" + params.idDesconexion + "'";
+        layerDefinitions[0] = "WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='" + params.idDesconexion + "'";
         sectores_programados.setVisibleLayers = [0];
         sectores_programados.setLayerDefinitions(layerDefinitions);
         map.addLayer(sectores_programados);
@@ -118,14 +118,14 @@ class Main extends React.Component {
           countryCode: 'CHL'
         }, "search");
         search.startup();
-
+       
 
         /*Zoom para tramos: Query*/
-        var tramos = getTramosInterrumpidos(params.idDesconexion)
+          var tramos = getTramosInterrumpidos(params.idDesconexion)
         .then(results=>{
           console.log('results :', results);
           map.setExtent(results[1].offset(-50,-3), true);
-          changeLoaderVisibility(!loaderVisibility);
+           changeLoaderVisibility(!loaderVisibility);
         
         }).catch(error=>{
           console.log('error : No se ha podido encontrar la desconexión', error);
@@ -136,7 +136,7 @@ class Main extends React.Component {
       }).catch(error => {
         console.log('error :', error);
       });
-
+      
   }
 
   componentDidMount() {

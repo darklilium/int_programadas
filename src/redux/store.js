@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import env from '../services/config';
 
-
+/*
 const composeEnhancers =
   typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
@@ -22,9 +22,8 @@ export default function configureStore(initialState) {
       return createStore(reducer, initialState, applyMiddleware(thunk));
   }
 }
+*/
 
-/*
 export default function configureStore(initialState) {
       return createStore(reducer, initialState, applyMiddleware(thunk));
 }
-*/
