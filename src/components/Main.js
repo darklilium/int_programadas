@@ -5,29 +5,22 @@ import { Container, Divider, Message, Icon, Button } from 'semantic-ui-react';
 import Symbology from './Symbology';
 import {
   userLogin, sectorInfo, getSectorLocation,
-  showNotification, dismissNotification, saveRegion, 
-  toggleMobileVisibility, 
+  showNotification, dismissNotification, saveRegion,
+  toggleMobileVisibility,
   toggleLoaderVisibility, toggleLoaderMessage
 } from '../redux/actions';
 import { connect } from 'react-redux';
 
-import {getTramosInterrumpidos} from '../services/regionsExtent';
+import { getTramosInterrumpidos } from '../services/regionsExtent';
 import { getURLParameters } from '../services/parameters';
 import ArcGISDynamicMapServiceLayer from 'esri/layers/ArcGISDynamicMapServiceLayer';
-import FeatureLayer from 'esri/layers/FeatureLayer';
-
 import getLayer from '../services/layers-service';
 import BasemapToggle from "esri/dijit/BasemapToggle";
-import getInfoTemplate from '../services/infoTemplates';
-import { conf } from '../services/config';
 import env from '../services/config';
-
 import CustomSearch from './CustomSearch';
 import mapa from '../services/map_service';
 import Search from 'esri/dijit/Search';
 import $ from 'jquery';
-
-import graphicsUtils from 'esri/graphicsUtils';
 import Loaderx from './Loader';
 
 
@@ -40,7 +33,7 @@ class Main extends React.Component {
     this.prod = this.prod.bind(this);
 
   }
-
+  //activa modo developer
   dev() {
     var map = mapa.createMap();
 
@@ -48,7 +41,7 @@ class Main extends React.Component {
 
     var l = login_in()
       .then(token => {
-       
+
         var sectores_programados = new ArcGISDynamicMapServiceLayer(getLayer.read_po_sectores_programados_dyn(), { id: "sectores_prog" })
         var layerDefinitions = [];
         layerDefinitions[0] = "WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='" + sector.idDesconexion + "'";
@@ -72,16 +65,16 @@ class Main extends React.Component {
 
         /*Zoom para tramos: Query*/
         var tramos = getTramosInterrumpidos(sector.idDesconexion)
-        .then(results=>{
-          
-          map.setExtent(results[1].offset(-50,-3), true);
-          changeLoaderVisibility(!loaderVisibility);
-        
-        }).catch(error=>{
-          console.log('error : No se ha podido encontrar la desconexión', error);
-          changeLoaderMessage("No se ha podido encontrar la desconexión. Intente nuevamente.")
+          .then(results => {
 
-        });
+            map.setExtent(results[1].offset(-50, -3), true);
+            changeLoaderVisibility(!loaderVisibility);
+
+          }).catch(error => {
+            console.log('error : No se ha podido encontrar la desconexión', error);
+            changeLoaderMessage("No se ha podido encontrar la desconexión. Intente nuevamente.")
+
+          });
 
       }).catch(error => {
         console.log('error :', error);
@@ -89,7 +82,7 @@ class Main extends React.Component {
 
 
   }
-
+  //activa modo developer
   prod() {
     var map = mapa.createMap();
     var params = getURLParameters();
@@ -98,7 +91,7 @@ class Main extends React.Component {
 
     var l = login_in()
       .then(token => {
-      
+
         var sectores_programados = new ArcGISDynamicMapServiceLayer(getLayer.read_po_sectores_programados_dyn(), { id: "sectores_prog" })
         var layerDefinitions = [];
         layerDefinitions[0] = "WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='" + params.idDesconexion + "'";
@@ -118,27 +111,28 @@ class Main extends React.Component {
           countryCode: 'CHL'
         }, "search");
         search.startup();
-       
+
 
         /*Zoom para tramos: Query*/
-          var tramos = getTramosInterrumpidos(params.idDesconexion)
-        .then(results=>{
-          console.log('results :', results);
-          map.setExtent(results[1].offset(-50,-3), true);
-           changeLoaderVisibility(!loaderVisibility);
-        
-        }).catch(error=>{
-          console.log('error : No se ha podido encontrar la desconexión', error);
-          //changeLoaderVisibility(!loaderVisibility);
-          changeLoaderMessage("No se ha podido encontrar la desconexión. Intente nuevamente.")
-        });
+        var tramos = getTramosInterrumpidos(params.idDesconexion)
+          .then(results => {
+            //console.log('results :', results);
+            map.setExtent(results[1].offset(-50, -3), true);
+            changeLoaderVisibility(!loaderVisibility);
+
+          }).catch(error => {
+            console.log('error : No se ha podido encontrar la desconexión', error);
+            //changeLoaderVisibility(!loaderVisibility);
+            changeLoaderMessage("No se ha podido encontrar la desconexión. Intente nuevamente.")
+          });
 
       }).catch(error => {
         console.log('error :', error);
       });
-      
+
   }
 
+  //activa modo
   componentDidMount() {
     if (env.ENVIRONMENT == 'DEVELOPMENT') {
       this.dev();
@@ -148,6 +142,7 @@ class Main extends React.Component {
 
   }
 
+  //hace toggle a la simbologia
   SymbologyVisibility() {
     const { toggleMobileVisibility, mobile } = this.props;
 
@@ -189,10 +184,10 @@ class Main extends React.Component {
     } else {
       msg = null;
     }
+
     return (
-     
-      
-      <Container  className="map_container">
+
+      <Container className="map_container">
         <Loaderx />
         <div id="map"></div>
 
@@ -218,11 +213,12 @@ class Main extends React.Component {
         <div id="BasemapToggle"></div>
 
       </Container>
-     
+
     );
   }
 }
 
+//redux de acciones
 const mapDispatchToProps = (dispatch) => {
   return {
     login_in: () => dispatch(userLogin()),

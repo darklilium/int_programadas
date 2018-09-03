@@ -30,7 +30,7 @@ var conf = ( () => {
 */
 
 //DESA SERV CHQ
-
+/*
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'css/',
@@ -50,10 +50,10 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-
+*/
 
 //PROD serv chq
-/*
+
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'css/',
@@ -74,6 +74,6 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-*/
+
 export {conf}
 export default env;

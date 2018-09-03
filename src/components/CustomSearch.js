@@ -14,6 +14,7 @@ function preventDefault(e) {
   e.preventDefault();
 }
 
+//Maneja las busquedas
 class CustomSearch extends Component{
   constructor(props){
     super(props);

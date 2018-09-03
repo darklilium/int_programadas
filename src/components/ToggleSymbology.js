@@ -9,6 +9,7 @@ const SymbologyImg = ({imagen}) => {
   return <div className="simbologia_container"><img src={imagen}></img></div>
 }
 
+//Componente que activa la simbologia.
 class ToggleSymbology extends React.Component {
   constructor(props){
     super(props);
