@@ -1,13 +1,13 @@
 /*
 APP: InterrupcionesProgramadas
 Author: Evelyn Hernandez
-Version: 0.7
-Date: 2018-08-29
+Version: 0.7.1d
+Date: 2018-11-07
 */
 
 
-//DEV
-/*
+//DEVELOPMENT
+
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'src/css/',
@@ -16,7 +16,7 @@ const env = {
     WEBSERVERADDRESS: "http://pchilquinta.cl/mapafallas",
     SAVEAPPLICATIONMODULE: "",
     SAVEAPPLICATIONNAME: '',
-    BUILDFOR: 'INTERNA'
+    BUILDFOR: 'EXTERNA'
 }
 
 var conf = ( () => {
@@ -27,7 +27,7 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-*/
+
 
 //DESA SERV CHQ
 /*
@@ -52,14 +52,14 @@ var conf = ( () => {
 })();
 */
 
-//PROD serv chq
-
+//PRODUCTION: SERVIDOR CHILQUINTA WEBSITE
+/*
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'css/',
     ROUTEPATH: 'index.html',
     ENVIRONMENT: 'PRODUCTION',
-    WEBSERVERADDRESS: "https://portalweb.chilquinta.cl/mapafallas",
+    WEBSERVERADDRESS: "https://chilquinta.cl/mapafallas",
     SAVEAPPLICATIONMODULE: "",
     SAVEAPPLICATIONNAME: '',
     BUILDFOR: 'EXTERNA'
@@ -74,6 +74,6 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-
+*/
 export {conf}
 export default env;

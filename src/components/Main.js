@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../css/myStyles.scss';
-
 import { Container, Divider, Message, Icon, Button } from 'semantic-ui-react';
 import Symbology from './Symbology';
 import {
@@ -10,7 +9,6 @@ import {
   toggleLoaderVisibility, toggleLoaderMessage
 } from '../redux/actions';
 import { connect } from 'react-redux';
-
 import { getTramosInterrumpidos } from '../services/regionsExtent';
 import { getURLParameters } from '../services/parameters';
 import ArcGISDynamicMapServiceLayer from 'esri/layers/ArcGISDynamicMapServiceLayer';
@@ -22,9 +20,6 @@ import mapa from '../services/map_service';
 import Search from 'esri/dijit/Search';
 import $ from 'jquery';
 import Loaderx from './Loader';
-
-
-
 
 class Main extends React.Component {
   constructor(props) {
@@ -66,7 +61,7 @@ class Main extends React.Component {
         /*Zoom para tramos: Query*/
         var tramos = getTramosInterrumpidos(sector.idDesconexion)
           .then(results => {
-
+           
             map.setExtent(results[1].offset(-50, -3), true);
             changeLoaderVisibility(!loaderVisibility);
 
@@ -80,9 +75,8 @@ class Main extends React.Component {
         console.log('error :', error);
       });
 
-
   }
-  //activa modo developer
+  //activa modo producción
   prod() {
     var map = mapa.createMap();
     var params = getURLParameters();
@@ -154,8 +148,6 @@ class Main extends React.Component {
       toggleMobileVisibility(true)
       $('.symbology_container').css('visibility', 'hidden')
     }
-
-
   }
 
   render() {

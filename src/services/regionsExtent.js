@@ -118,7 +118,7 @@ function getTramosInterrumpidos(sector){
     q.where = "WEBPORTAL.dbo.SDD_DESCONEXIONES.id_desconexion='" + sector + "'";
 
     qTask.execute(q, (featureSet)=>{
-      console.log('featureSet :', featureSet);
+     
       var graphicsArray = featureSet.features.map(f=>{
         return new Graphic(f.geometry, mySymbol, f.attributes)
       });

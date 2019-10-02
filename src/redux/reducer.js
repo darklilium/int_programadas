@@ -17,11 +17,11 @@ function login(state = {}, action) {
 }
 
 function sector(state= {
-  idsector: '140694103',
+  idsector: '0',
   nombre: '',
-  comuna: 'VALPARAISO',
+  comuna: 'LLAY LLAY',
   location: '',
-  idDesconexion: 'DX20935'
+  idDesconexion: 'DX35971'
 }, action){
 
   switch (action.type) {
