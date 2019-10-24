@@ -17,11 +17,11 @@ function login(state = {}, action) {
 }
 
 function sector(state= {
-  idsector: '0',
+  idsector: '',
   nombre: '',
-  comuna: 'LLAY LLAY',
+  comuna: '',
   location: '',
-  idDesconexion: 'DX35971'
+  idDesconexion: ''
 }, action){
 
   switch (action.type) {

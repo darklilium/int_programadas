@@ -7,7 +7,7 @@ Date: 2018-11-07
 
 
 //DEVELOPMENT
-
+/*
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'src/css/',
@@ -27,7 +27,7 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-
+*/
 
 //DESA SERV CHQ
 /*
@@ -53,7 +53,7 @@ var conf = ( () => {
 */
 
 //PRODUCTION: SERVIDOR CHILQUINTA WEBSITE
-/*
+
 const env = {
     ROOT: "/",
     CSSDIRECTORY: 'css/',
@@ -74,6 +74,6 @@ var conf = ( () => {
 
   return () => {return credentials}
 })();
-*/
+
 export {conf}
 export default env;
