@@ -21,7 +21,7 @@ const env = {
 
 var conf = ( () => {
   var credentials = {
-    user: 'vialactea\\',
+    user: '',
     pass: ''
   }
 
@@ -44,7 +44,7 @@ const env = {
 
 var conf = ( () => {
   var credentials = {
-    user: 'vialactea\\',
+    user: '',
     pass: ''
   }
 
